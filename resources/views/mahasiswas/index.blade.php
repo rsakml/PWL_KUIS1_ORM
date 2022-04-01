@@ -5,6 +5,18 @@
             <div class="pull-left mt-2">
                 <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
             </div>
+
+            <div class="float-left my-2">
+                <form action="{{ route('mahasiswa.index') }}" method="GET">
+                    <div class="input-group mb-3">  
+                        <input type="text" class="form-control" name="cari" value="{{ $cari }}" size ="30" placeholder="Masukkan Nama Mahasiswa">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">Search</button>
+                        </div>
+                    </div>   
+                </form>   
+            </div>
+
             <div class="float-right my-2">
                 <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
             </div>
@@ -51,4 +63,7 @@
         </tr>
     @endforeach
     </table>
+
+        {{ $mahasiswas->links() }}
+        
 @endsection
