@@ -7,9 +7,9 @@
             </div>
 
             <div class="float-left my-2">
-                <form action="{{ route('mahasiswa.index') }}" method="GET">
+                <form action="{{ route('search') }}" method="GET">
                     <div class="input-group mb-3">  
-                        <input type="text" class="form-control" name="cari" value="{{ $cari }}" size ="30" placeholder="Masukkan Nama Mahasiswa">
+                        <input type="text" class="form-control" name="cari" value="{{ request('cari')}}" size ="30" placeholder="Masukkan Nama Mahasiswa">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="submit">Search</button>
                         </div>
@@ -40,21 +40,21 @@
             <th>Email</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($mahasiswas as $Mahasiswa)
+        @foreach ($paginate as $mhs)
         <tr>
 
-            <td>{{ $Mahasiswa->nim }}</td>
-            <td>{{ $Mahasiswa->nama }}</td>
-            <td>{{ $Mahasiswa->tglLahir }}</td>
-            <td>{{ $Mahasiswa->kelas }}</td>
-            <td>{{ $Mahasiswa->jurusan }}</td>
-            <td>{{ $Mahasiswa->no_handphone }}</td>
-            <td>{{ $Mahasiswa->email }}</td>
+            <td>{{ $mhs->nim }}</td>
+            <td>{{ $mhs->nama }}</td>
+            <td>{{ $mhs->tglLahir }}</td>
+            <td>{{ $mhs->kelas->nama_kelas }}</td>
+            <td>{{ $mhs->jurusan }}</td>          
+            <td>{{ $mhs->no_handphone }}</td>
+            <td>{{ $mhs->email }}</td>
             <td>
-            <form action="{{ route('mahasiswa.destroy',$Mahasiswa->nim) }}" method="POST">
+            <form action="{{ route('mahasiswa.destroy',$mhs->nim) }}" method="POST">
 
-                <a class="btn btn-info" href="{{ route('mahasiswa.show',$Mahasiswa->nim) }}">Show</a>
-                <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$Mahasiswa->nim) }}">Edit</a>
+                <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
+                <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$mhs->nim) }}">Edit</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -64,6 +64,6 @@
     @endforeach
     </table>
 
-        {{ $mahasiswas->links() }}
+        {{ $paginate->links() }}
         
 @endsection
