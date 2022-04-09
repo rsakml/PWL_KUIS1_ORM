@@ -172,4 +172,11 @@ class MahasiswaController extends Controller
         $paginate = Mahasiswa::where('nama','like',"%". $cari . "%") -> paginate(3);
         return view(view: 'mahasiswas.index', data: compact('paginate','cari'));
     }
+
+    public function mhsMatkul($nim){
+
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        return view('mahasiswas.nilai', ['mahasiswa' => $mahasiswa]);
+
+    }
 };

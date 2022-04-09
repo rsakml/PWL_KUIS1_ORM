@@ -9,7 +9,7 @@
             <div class="float-left my-2">
                 <form action="{{ route('search') }}" method="GET">
                     <div class="input-group mb-3">  
-                        <input type="text" class="form-control" name="cari" value="{{ request('cari')}}" size ="30" placeholder="Masukkan Nama Mahasiswa">
+                        <input type="text" class="form-control" name="cari" size ="30" placeholder="Masukkan Nama Mahasiswa">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="submit">Search</button>
                         </div>
@@ -38,7 +38,7 @@
             <th>Jurusan</th>
             <th>No_Handphone</th>
             <th>Email</th>
-            <th width="280px">Action</th>
+            <th width="290px">Action</th>
         </tr>
         @foreach ($paginate as $mhs)
         <tr>
@@ -55,6 +55,7 @@
 
                 <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
                 <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$mhs->nim) }}">Edit</a>
+                <a class="btn btn-warning" href="{{route('nilai',$mhs->nim) }}"> Nilai</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
