@@ -169,7 +169,7 @@ class MahasiswaController extends Controller
 
     public function search(Request $request){
         $cari = $request -> cari;
-        $paginate = Mahasiswa::where('nama','like',"%". $cari . "%") -> paginate(3);
+        $paginate = Mahasiswa::where('nama','like',"%". $cari . "%") -> paginate(5);
         return view(view: 'mahasiswas.index', data: compact('paginate','cari'));
     }
 
