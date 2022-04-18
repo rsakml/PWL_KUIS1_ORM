@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -58,6 +59,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:1024',
             'tglLahir' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
@@ -68,6 +70,7 @@ class MahasiswaController extends Controller
             $mahasiswa = new Mahasiswa;
             $mahasiswa->nim = $request->get('nim');
             $mahasiswa->nama = $request->get('nama');
+            $mahasiswa->foto = $request->file('foto')->store('images', 'public');
             $mahasiswa->tglLahir = $request->get('tglLahir');
             $mahasiswa->jurusan = $request->get('jurusan');
             $mahasiswa->no_handphone = $request->get('no_handphone');
@@ -126,6 +129,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:1024',
             'tglLahir' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
@@ -136,6 +140,11 @@ class MahasiswaController extends Controller
             $mahasiswa = Mahasiswa::with('kelas')->where('nim', $nim)->first();
             $mahasiswa->nim = $request->get('nim');
             $mahasiswa->nama = $request->get('nama');
+            if($mahasiswa->foto && file_exists(storage_path('app/public/'. $mahasiswa->foto))){
+                \Storage::delete('public/'. $mahasiswa->foto);
+            }
+            $image_name = $request->file('foto')->store('images', 'public');
+            $mahasiswa->foto = $image_name;
             $mahasiswa->tglLahir = $request->get('tglLahir');
             $mahasiswa->jurusan = $request->get('jurusan');
             $mahasiswa->no_handphone = $request->get('no_handphone');
