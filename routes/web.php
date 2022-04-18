@@ -7,6 +7,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,5 @@ Route::resource('mahasiswa', MahasiswaController::class);
 Route::get('search', [MahasiswaController::class,'search'])->name('search');
 
 Route::get('/mahasiswa/nilai/{mahasiswa}', [MahasiswaController::class, 'mhsMatkul'])->name('nilai');
+
+Route::resource('articles', ArticleController::class);
