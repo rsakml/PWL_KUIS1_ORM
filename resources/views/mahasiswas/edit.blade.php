@@ -35,7 +35,7 @@
                         <label for="foto">Foto</label>
                         <input type="file" class="form-control" required="required" name="foto"
                             value="{{ $mahasiswa->foto }}"></br>
-                        <img width="150px" src="{{ asset('storage/' . $mahasiswa->foto) }}">
+                        <img width="100px" src="{{ asset('storage/' . $mahasiswa->foto) }}">
                     </div>
                     <div class="form-group">
                         <label for="tglLahir">Tanggal Lahir</label>              
